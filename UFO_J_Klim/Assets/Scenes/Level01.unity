@@ -243,6 +243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8aa35fcecc847043b733d22364be376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreText: {fileID: 0}
+  winText: {fileID: 0}
 --- !u!58 &192109037
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1016,7 +1018,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Wynik:'
+  m_Text: 'Wynik: 0'
 --- !u!222 &2100817946
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1060,8 +1062,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 34, y: -8}
-  m_SizeDelta: {x: 307.4069, y: 30}
+  m_AnchoredPosition: {x: 21.7837, y: 25.8918}
+  m_SizeDelta: {x: 350.9743, y: 51.7837}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2143083672
 MonoBehaviour:
