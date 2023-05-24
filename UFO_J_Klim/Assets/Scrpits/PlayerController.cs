@@ -31,14 +31,21 @@ public class PlayerController : MonoBehaviour
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
         rb2dl.AddForce(movement * 15);
     }
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        DontDestroyOnLoad(Collision2D collision);
+        {
+            AudioManager.instance.PlayMusic("Bouce");
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Pickup"))
         {
-            count = count + 1;
+            count++; 
             Destroy(collision.gameObject);
             UpdateScoreText();
+            AudioManager.instance.PlayMusic("Coin");
         }
     }
     void UpdateScoreText()
@@ -50,6 +57,8 @@ public class PlayerController : MonoBehaviour
             winText.gameObject.SetActive(true);
             scoreText.gameObject.SetActive(false);
             StartCoroutine(StopTime());
+            AudioManager.instance.PlayMusic("Win");
+            
         }
     }
 
