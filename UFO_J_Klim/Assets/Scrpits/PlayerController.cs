@@ -1,67 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
-using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Diagnostics;
-using System;
+using System.Threading;
 
 public class PlayerController : MonoBehaviour
 {
     public Text scoreText;
     public Text winText;
-    Rigidbody2D rb2dl;
-    // Start is called before the first frame update
+    Rigidbody2D rb2d;
+    public float speed = 0;
     private int count = 0;
-
-    public object ScoreText { get; private set; }
-
     void Start()
     {
-        rb2dl = GetComponent<Rigidbody2D>();
+
+        rb2d = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     private void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
-        rb2dl.AddForce(movement * 15);
+        rb2d.AddForce(movement * speed);
+
+
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        DontDestroyOnLoad(Collision2D collision);
-        {
-            AudioManager.instance.PlayMusic("Bouce");
-        }
+        AudioManager.instance.PlaySFX("Bounce");
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Pickup"))
+        if (collision.CompareTag("PickUp"))
         {
-            count++; 
+            count++; //zwieksz wartosc o 1
             Destroy(collision.gameObject);
             UpdateScoreText();
-            AudioManager.instance.PlayMusic("Coin");
+            AudioManager.instance.PlaySFX("Coin");
         }
     }
+
     void UpdateScoreText()
     {
-        scoreText.text = "Wynik" + count;
-        if (count == 4)
+        scoreText.text = "Wynik: " + count;
+        if (count == 3)
         {
-
             winText.gameObject.SetActive(true);
             scoreText.gameObject.SetActive(false);
+            AudioManager.instance.PlaySFX("Win");
             StartCoroutine(StopTime());
-            AudioManager.instance.PlayMusic("Win");
-            
+
         }
     }
-
 
     IEnumerator StopTime()
     {
